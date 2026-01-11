@@ -1,0 +1,11 @@
+{
+	"name": "StraightLineBingo",
+	"version": "1.0",
+	"target": "dist",
+	"remove_file_types": [
+		"xcf", "py", "jsonc"
+	],
+	"datapack": {
+		"path": "."
+	}
+}
