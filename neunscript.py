@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # This script is used for building this pack
 import hashlib
 import json
@@ -5,7 +6,6 @@ import os
 import re
 import shutil
 import urllib.request
-from distutils.dir_util import copy_tree
 from sys import stderr
 import pyjson5
 
@@ -209,10 +209,10 @@ def minify_function_file(file_content: str):
 				output += "\n"
 			output += line
 		elif line.startswith("#NEUN_SCRIPT"):
-			match=re.match("#NEUN_SCRIPT\s+(.*)", line)
+			match=re.match(r"#NEUN_SCRIPT\s+(.*)", line)
 
 			if match != None:
-				command = re.sub("\s+", " ", match.group(1)).lower().split(" ")
+				command = re.sub(r"\s+", " ", match.group(1)).lower().split(" ")
 
 				if command[0] == "uncomment":
 					uncomment = -1
@@ -266,7 +266,7 @@ def copy_pack(pack_config: dict, tmp_dir: str, paths: list[str] | None):
 
 def copy_file_or_dir(src: str, target: str):
 	if os.path.isdir(src):
-		copy_tree(src, target)
+		shutil.copytree(src, target)
 	elif os.path.isfile(src):
 		shutil.copy2(src, target)
 
